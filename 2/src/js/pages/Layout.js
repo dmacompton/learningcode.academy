@@ -1,26 +1,21 @@
 import React from "react";
-
-import Footer from "./Footer";
-import Header from "./Header";
+import {Link} from "react-router";
 
 export default class Layout extends React.Component {
-    constructor() {
-        super();    // обязательно вызывать в конструкторе
-        this.state = {
-            title: "Welcome"
-        };
-    }
+  navigate() {
+    this.props.history.replace( "/");
+    // this.props.history.push("/");
+  }
 
-    changeTitle(title) {
-        this.setState({title});
-    }
-
-    render() {
-        return (
-            <div>
-        <Header changeTitle={this.changeTitle.bind(this)} title={this.state.title} />
-        <Footer />
+  render() {
+    return (
+      <div>
+        <h1>KillerNews.net</h1>
+        {this.props.children}
+        <Link to="archives" className="btn btn-danger">archives</Link>
+        <Link to="settings"><button className="btn btn-success">settings</button></Link>
+        <button onClick={this.navigate.bind(this)}>featured</button>
       </div>
-        );
-    }
+    );
+  }
 }
